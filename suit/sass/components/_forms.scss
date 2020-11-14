@@ -389,3 +389,8 @@ fieldset {
   $select-border-width: ($border-width * 2);
   height: calc(#{$input-height} - #{$select-border-width} - 5px);
 }
+
+// for compatibility with bootstrap-alpha6
+.tabular .form-row {
+  display: table-row;
+}

@@ -2519,6 +2519,8 @@ fieldset.collapse { display: block; }
 
 .custom-select-sm { height: calc(calc(2.25rem + 2px) - 2px - 5px); }
 
+.tabular .form-row { display: table-row; }
+
 /* TabularInlines Sortables */
 .inline-sortable { white-space: nowrap; }
 
