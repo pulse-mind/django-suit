@@ -25,7 +25,7 @@
                 {% endif %}
 
                 {% if field.is_readonly %}
-                    <p class="form-control-static">{{ field.contents }}</p>
+                    <p class="form-control-plaintext">{{ field.contents }}</p>
                 {% else %}
                     {{ field.field }}
                 {% endif %}
