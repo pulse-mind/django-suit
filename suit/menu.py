@@ -286,17 +286,18 @@ class MenuManager(object):
 
         request_path = str(self.request.path)
 
-        for parent_item in menu_items:
-            if not active_child:
-                for child_item in parent_item.children:
-                    if opts_key == child_item._key():
-                        active_child = child_item
-                        break
-                    elif not active_child_by_url and request_path == child_item.url:
-                        active_child_by_url = child_item
+        if menu_items:
+            for parent_item in menu_items:
+                if not active_child:
+                    for child_item in parent_item.children:
+                        if opts_key == child_item._key():
+                            active_child = child_item
+                            break
+                        elif not active_child_by_url and request_path == child_item.url:
+                            active_child_by_url = child_item
 
-            if active_child:
-                break
+                if active_child:
+                    break
 
             if not active_parent:
                 if url_name and url_name == parent_item._url_name or request_path == parent_item.url:
