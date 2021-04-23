@@ -23,13 +23,11 @@ def get_menu(context, request):
     """
     :type request: WSGIRequest
     """
-    print(type(request))
     if not isinstance(request, HttpRequest):
         return []
 
     # Django 1.9+
     available_apps = context.get('available_apps', [])
-    print('available_apps', available_apps)
     if not available_apps:
 
         # Django 1.8 on app index only
@@ -37,17 +35,14 @@ def get_menu(context, request):
 
         # Django 1.8 on rest of the pages
         if not available_apps:
-            print('SHIIIIIIIIIIIIIIIT')
             try:
                 from django.contrib import admin
                 template_response = get_admin_site(request.current_app).index(request)
-                print('template_response.context_data', template_response.context_data)
                 available_apps = template_response.context_data['app_list']
             except Exception:
                 pass
 
     if not available_apps:
-        print('OJOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
         logging.warn('Django Suit was unable to retrieve apps list for menu.')
 
     return MenuManager(available_apps, context, request)

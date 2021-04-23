@@ -56,10 +56,8 @@ class MenuManager(object):
         self._available_apps = {'apps': {}, 'models': {}}
 
     def __iter__(self):
-        menu_items = self.get_menu_items()
-        if menu_items:
-            for each in self.get_menu_items():
-                yield each
+        for each in self.get_menu_items():
+            yield each
 
     def get_menu_items(self):
         if self.menu_items is None:
@@ -115,11 +113,6 @@ class MenuManager(object):
         """
         Make dictionary of native apps and models for easier matching
         """
-        print('***************************')
-        print(self.available_apps)
-        if not self.available_apps:
-            return
-
         for native_app in self.available_apps:
             app_key = native_app['app_url'].split('/')[-2]
             self._available_apps['apps'][app_key] = native_app
@@ -147,11 +140,6 @@ class MenuManager(object):
         return self._available_apps['models'].get(child_item._key())
 
     def build_menu_by_available_apps(self):
-        print('***************************')
-        print(self.available_apps)
-        if not self.available_apps:
-            return
-
         menu_items = []
         for native_app in self.available_apps:
             parent_item = self.make_parent_from_native_app(native_app)
@@ -288,18 +276,17 @@ class MenuManager(object):
 
         request_path = str(self.request.path)
 
-        if menu_items:
-            for parent_item in menu_items:
-                if not active_child:
-                    for child_item in parent_item.children:
-                        if opts_key == child_item._key():
-                            active_child = child_item
-                            break
-                        elif not active_child_by_url and request_path == child_item.url:
-                            active_child_by_url = child_item
+        for parent_item in menu_items:
+            if not active_child:
+                for child_item in parent_item.children:
+                    if opts_key == child_item._key():
+                        active_child = child_item
+                        break
+                    elif not active_child_by_url and request_path == child_item.url:
+                        active_child_by_url = child_item
 
-                if active_child:
-                    break
+            if active_child:
+                break
 
             if not active_parent:
                 if url_name and url_name == parent_item._url_name or request_path == parent_item.url:
