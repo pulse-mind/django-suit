@@ -28,13 +28,19 @@ def get_menu(context, request):
 
     # Django 1.9+
     available_apps = context.get('available_apps')
+    print('EOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
+    print('available_apps', available_apps)
     if not available_apps:
 
         # Django 1.8 on app index only
         available_apps = context.get('app_list')
 
+        print(context)
+        print(dict(context))
+
         # Django 1.8 on rest of the pages
         if not available_apps:
+            print('SHIIIIIIIIIIIIIIIT')
             try:
                 from django.contrib import admin
                 template_response = get_admin_site(request.current_app).index(request)
