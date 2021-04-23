@@ -56,8 +56,10 @@ class MenuManager(object):
         self._available_apps = {'apps': {}, 'models': {}}
 
     def __iter__(self):
-        for each in self.get_menu_items():
-            yield each
+        menu_items = self.get_menu_items()
+        if menu_items:
+            for each in self.get_menu_items():
+                yield each
 
     def get_menu_items(self):
         if self.menu_items is None:
