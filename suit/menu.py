@@ -145,6 +145,11 @@ class MenuManager(object):
         return self._available_apps['models'].get(child_item._key())
 
     def build_menu_by_available_apps(self):
+        print('***************************')
+        print(self.available_apps)
+        if not self.available_apps:
+            return
+
         menu_items = []
         for native_app in self.available_apps:
             parent_item = self.make_parent_from_native_app(native_app)
