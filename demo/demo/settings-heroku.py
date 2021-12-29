@@ -34,10 +34,10 @@ ALLOWED_HOSTS = ['django-suit-v2.herokuapp.com']
 INSTALLED_APPS = [
 
     # Demo app
-    'demo.demo',
+    'demo',
 
     # Django Suit
-    'demo.demo.apps.SuitConfig',
+    'demo.apps.SuitConfig',
 
     # 3rd party apps
     'django_select2',
