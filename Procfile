@@ -1,1 +1,1 @@
-web: python manage.py runserver 0.0.0.0:$PORT --settings=demo.demo.settings-heroku
+web: python demo/manage-heroku.py runserver 0.0.0.0:$PORT
