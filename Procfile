@@ -1,1 +1,1 @@
-web: mkdir -p demo/demo/static && python demo/manage-heroku.py collectstatic && python demo/manage-heroku.py runserver 0.0.0.0:$PORT
+web: mkdir -p demo/demo/static && python demo/manage.py collectstatic && python demo/manage-heroku.py runserver 0.0.0.0:$PORT
