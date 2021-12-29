@@ -30,4 +30,4 @@ jobs:
         pip install Django==${{ matrix.django-version }}
     - name: Run Tests
       run: |
-        python suit/tests/manage.py test suit --settings=suit.tests.settings
+        python manage.py test suit --settings=suit.tests.settings
