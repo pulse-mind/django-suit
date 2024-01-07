@@ -47,4 +47,4 @@ See `Contributing documentation <http://django-suit.readthedocs.org/en/v2/contri
 Build Status
 ============
 
-Tested using Python: 3.8 and PyPy. Django: 3.2 and Django 4.0 and Django Suit v2.2
+Tested using Python: 3.8 and PyPy + Django: 3.2 (LTS), Django 4.0, Django 4.1, Django 4.2 (LTS)
