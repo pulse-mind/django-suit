@@ -116,4 +116,4 @@ Generate the distribution archives on local machine:
 
 .. code-block:: bash
 
-    twine upload dist/* --repository prodpypi
+    twine upload --repository prodpypi dist/*
