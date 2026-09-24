@@ -3,14 +3,7 @@ from copy import deepcopy
 from django.utils.translation import gettext_lazy as _
 
 from json import dumps
-try:
-    from urllib import urlencode, unquote
-    from urlparse import urlparse, parse_qsl, ParseResult
-except ImportError:
-    # Python 3 fallback
-    from urllib.parse import (
-        urlencode, unquote, urlparse, parse_qsl, ParseResult
-    )
+from urllib.parse import urlencode, unquote, urlparse, parse_qsl, ParseResult
 
 
 def add_url_params(url, params):
@@ -277,10 +270,7 @@ class MenuManager(object):
             return menu_item
         if '/' in menu_item.url:
             return menu_item
-        try:
-            from django.urls import reverse, NoReverseMatch
-        except:
-            from django.core.urlresolvers import reverse, NoReverseMatch
+        from django.urls import reverse, NoReverseMatch
         try:
             menu_item.url = reverse(menu_item.url, current_app=self.current_app)
             menu_item._url_name = menu_item.url

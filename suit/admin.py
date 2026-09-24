@@ -2,10 +2,7 @@ from django.contrib import admin
 from django.core.exceptions import FieldDoesNotExist
 from django.db import models
 from django.utils.safestring import mark_safe
-try:
-    from django.urls import reverse_lazy
-except:
-    from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 
 """
 Adapted by using following examples:
