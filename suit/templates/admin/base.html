@@ -3,6 +3,9 @@
 
 {% block stylesheet %}{% if debug %}{% static "suit/css/suit.css" %}{% else %}{% static "suit/css/suit.min.css" %}{% endif %}{% endblock %}
 
+{# No Django dark theme: suit has none, and dark_mode.css would only turn native controls (checkboxes, date pickers) dark on suit's light UI #}
+{% block dark-mode-vars %}{% endblock %}
+
 {% block extrastyle %}
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
     <link href='{% static "suit/css/font-awesome.min.css" %}' rel='stylesheet' type='text/css'>
@@ -83,10 +86,9 @@
 {% endblock %}
 
 {% block footer %}
-{#    </div> <!-- Put footer outside #container -->#}
+    {# Rendered inside Django's <footer id="footer"> (Django 5.0): no #footer / <footer> of our own #}
     {% if not is_popup %}
-        <div id="footer">
-        <footer class="footer">
+        <div class="footer">
             <div class="container-fluid">
                 {% block footer_content %}
                     <div class="row">
@@ -123,10 +125,9 @@
                     </div>
                 {% endblock %}
             </div>
-        </footer>
+        </div>
     {% endif %}
 
-{#    {{ block.super }}#}
     <script src="{% static "suit/js/suit.js" %}"></script>
     {% if cl.formset or action_form and 'toggle_changelist_top_actions'|suit_conf:request %}
         <script type="text/javascript">
@@ -153,8 +154,6 @@
         </script>
     {% endif %}
     <script src="{% static "vendor/js/bootstrap.bundle.min.js" %}"></script>
-
-{#    <div> <!-- Fix/close div previously closed by footer -->#}
 {% endblock %}
 
 <!-- This is a solution to remove the sidebar that is not compatible with django-suit. -->

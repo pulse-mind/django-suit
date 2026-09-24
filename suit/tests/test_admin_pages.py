@@ -60,6 +60,12 @@ class AdminPagesTestCase(TestCase):
         self.assertPage(reverse('admin:app_list', args=['suit_tests']))
         self.assertPage(reverse('admin:app_list', args=['auth']))
 
+    def test_no_django_dark_theme(self):
+        # suit has no dark theme: Django's dark_mode.css / theme.js would only darken native controls
+        response = self.assertPage(reverse('admin:index'))
+        self.assertNotContains(response, 'dark_mode.css')
+        self.assertNotContains(response, 'theme.js')
+
     def test_logout_is_a_post_form(self):
         # GET logout is deprecated since Django 4.1 and removed in 5.0
         self.assertPage(reverse('admin:index'), '<form id="logout-form" method="post" action="%s">' % reverse('admin:logout'))
@@ -120,6 +126,15 @@ class AdminPagesTestCase(TestCase):
         self.assertPage(url + '?population__isnull=True')
         self.assertPage(url + '?q=fra', '1 result')
         self.assertPage(url + '?_to_field=id&_popup=1')
+
+    def test_changelist_facets(self):
+        # ModelAdmin.show_facets = ALLOW (Django 5.0): counts in the horizontal filter choices with
+        # ?_facets, including suit's IsNullFieldListFilter (France has a population, Latvia not)
+        url = self.admin_urls(self.france)['changelist']
+        response = self.assertPage(url + '?_facets=True', 'FR (1)', 'Is present (1)', 'Is Null (1)')
+        self.assertNotContains(self.client.get(url), 'Is present (')
+        self.assertPage(url + '?population__isnull=True&_facets=True', 'Latvia')
+        self.assertNotContains(response, 'Traceback')
 
     def test_sortable_changelist_and_row_cell_attributes(self):
         response = self.assertPage(self.admin_urls(self.europe)['changelist'], 'suit-sortable',
