@@ -8,10 +8,14 @@
 {% endblock %}
 
 {% block filters %}
+    {# Based on Django 4.2; only the vertical filters are listed here, suit_list_filter_horizontal ones are in suit/search_form.html #}
     {% if cl.has_filters %}
         <div id="changelist-filter">{% for spec in cl.filter_specs|suit_list_filter_vertical:cl %}
             {% if forloop.first %}
-                <h2>{% trans 'Filter' %}</h2>
+                <h2>{% translate 'Filter' %}</h2>
+                {% if cl.has_active_filters %}<h3 id="changelist-filter-clear">
+                  <a href="{{ cl.clear_all_filters_qs }}">&#10006; {% translate "Clear all filters" %}</a>
+                </h3>{% endif %}
             {% endif %}
             {% admin_list_filter cl spec %}
         {% endfor %}</div>

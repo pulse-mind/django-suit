@@ -7,11 +7,6 @@ body.change-form {
 }
 
 /* Begin Django3.1 */
-/* Hide the changelist-filter */
-#changelist-filter{
-  display:none;
-}
-
 #changelist .changelist-form-container {
     flex: 1 1 auto;
     min-width: 0;

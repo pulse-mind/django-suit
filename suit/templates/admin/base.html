@@ -50,6 +50,7 @@
             {% endblock %}
             <div class="user-links">
             {% block userlinks %}
+                {# Django 4.2 also includes admin/color_theme_toggle.html here: left out until suit supports the dark theme #}
                 {% if site_url %}
                     <a href="{{ site_url }}" class="icon-link view-site-link" data-title="{% trans 'View site' %}">{% trans 'View site' %}</a>
                     <span class="separator">/</span>

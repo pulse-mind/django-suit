@@ -1,12 +1,13 @@
 {% extends "admin/change_form.html" %}
 {% load i18n %}
+{# form_top based on Django 4.2 admin/auth/user/add_form.html, plus block.super #}
 
 {% block form_top %}
     {{ block.super }}
 
     {% if not is_popup %}
-        <p>{% trans "First, enter a username and password. Then, you'll be able to edit more user options." %}</p>
+        <p>{% translate 'First, enter a username and password. Then, you’ll be able to edit more user options.' %}</p>
     {% else %}
-        <p>{% trans "Enter a username and password." %}</p>
+        <p>{% translate "Enter a username and password." %}</p>
     {% endif %}
 {% endblock %}

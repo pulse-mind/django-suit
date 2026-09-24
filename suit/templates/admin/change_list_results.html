@@ -1,4 +1,10 @@
-{% load i18n static suit_list %}
+{% load i18n suit_list %}
+{% comment %}
+Based on Django 4.2 admin/change_list_results.html. Deliberate differences:
+- headers and cells go through suit's headers_handler / cells_handler (suit_column_attributes,
+  suit_cell_attributes)
+- rows get suit's result_row_attrs (row1 / row2 + suit_row_attributes); Django 4.2 renders a bare <tr>
+{% endcomment %}
 {% if result_hidden_fields %}
 <div class="hiddenfields">{# DIV for HTML validation #}
 {% for item in result_hidden_fields %}{{ item }}{% endfor %}
@@ -10,15 +16,13 @@
 <thead>
 <tr>
 {% for header in result_headers|headers_handler:cl %}
-<th scope="col" {{ header.class_attrib }}>
-   {% if header.sortable %}
-     {% if header.sort_priority > 0 %}
+<th scope="col"{{ header.class_attrib }}>
+   {% if header.sortable and header.sort_priority > 0 %}
        <div class="sortoptions">
-         <a class="sortremove" href="{{ header.url_remove }}" title="{% trans "Remove from sorting" %}"></a>
-         {% if num_sorted_fields > 1 %}<span class="sortpriority" title="{% blocktrans with priority_number=header.sort_priority %}Sorting priority: {{ priority_number }}{% endblocktrans %}">{{ header.sort_priority }}</span>{% endif %}
-         <a href="{{ header.url_toggle }}" class="toggle {% if header.ascending %}ascending{% else %}descending{% endif %}" title="{% trans "Toggle sorting" %}"></a>
+         <a class="sortremove" href="{{ header.url_remove }}" title="{% translate "Remove from sorting" %}"></a>
+         {% if num_sorted_fields > 1 %}<span class="sortpriority" title="{% blocktranslate with priority_number=header.sort_priority %}Sorting priority: {{ priority_number }}{% endblocktranslate %}">{{ header.sort_priority }}</span>{% endif %}
+         <a href="{{ header.url_toggle }}" class="toggle {{ header.ascending|yesno:'ascending,descending' }}" title="{% translate "Toggle sorting" %}"></a>
        </div>
-     {% endif %}
    {% endif %}
    <div class="text">{% if header.sortable %}<a href="{{ header.url_primary }}">{{ header.text|capfirst }}</a>{% else %}<span>{{ header.text|capfirst }}</span>{% endif %}</div>
    <div class="clear"></div>
@@ -27,7 +31,7 @@
 </thead>
 <tbody>
 {% for result in results|cells_handler:cl %}
-{% if result.form.non_field_errors %}
+{% if result.form and result.form.non_field_errors %}
     <tr><td colspan="{{ result|length }}">{{ result.form.non_field_errors }}</td></tr>
 {% endif %}
 <tr{% result_row_attrs cl forloop.counter %}>{% for item in result %}{{ item }}{% endfor %}</tr>
