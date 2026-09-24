@@ -15,6 +15,14 @@ Versions 0.x are the original django-suit v1 by Kaspars Sprogis (darklow): see t
 requests <https://github.com/darklow/django-suit/pulls?q=sort%3Aupdated-desc+is%3Apr+is%3Aclosed>`_.
 
 
+v2.4.2 (2026-09-24)
+-------------------
+
+* [Change] **(visible)** The vertical list filter panel introduced in 2.4.1 is removed again: as up to
+  2.4, only the ``suit_list_filter_horizontal`` filters are displayed, in the changelist toolbar. The
+  other ``list_filter`` entries are not displayed (they still apply when present in the URL).
+
+
 v2.4.1 (2026-09-24)
 -------------------
 

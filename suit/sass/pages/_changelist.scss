@@ -68,25 +68,13 @@ $filter-col-width: 15rem;
       margin-bottom: $grid-gutter-width-base*0.5;
       display: none;
     }
-    // Filter titles: <h3> up to Django 4.0, <details><summary> (collapsible) since 4.1
-    h3, details > summary {
+    h3 {
       background-color: $inverse-lightest;
       color: #fff;
       font-size: $font-size-sm;
       font-weight: normal;
       padding: $grid-gutter-width-base*0.25 math.div($grid-gutter-width-base, 3);
       margin: 0;
-    }
-    details > summary {
-      cursor: pointer;
-    }
-    // "Clear all filters" link (Django 3.1), a plain link above the filters rather than a title bar
-    h3#changelist-filter-clear {
-      background-color: transparent;
-      padding: 0 0 math.div($grid-gutter-width-base, 3);
-      a {
-        color: $link-color;
-      }
     }
     ul {
       background-color: #fff;

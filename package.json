@@ -1,6 +1,6 @@
 {
   "name": "django-suit-dev",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "Django Suit development tools",
   "author": "Kaspars Sprogis",
   "devDependencies": {
