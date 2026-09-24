@@ -15,7 +15,7 @@ Versions 0.x are the original django-suit v1 by Kaspars Sprogis (darklow): see t
 requests <https://github.com/darklow/django-suit/pulls?q=sort%3Aupdated-desc+is%3Apr+is%3Aclosed>`_.
 
 
-v2.4.1 (unreleased)
+v2.4.1 (2026-09-24)
 -------------------
 
 Consolidation release for Django 4.0 to 4.2. Changes visible in the admin are marked **(visible)**.
