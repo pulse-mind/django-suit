@@ -10,13 +10,14 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest ]
-        python-version: [ '3.9', '3.10.13' ]
-        django-version: [ '3.2.10', '4.0.10', '4.1.13', '4.2.9' ]
+        python-version: [ '3.10.13', '3.12.13' ]
+        django-version: [ '4.0.10', '4.1.13', '4.2.9' ]
         exclude:
-          - os: macos-latest
-            python-version: '3.8'
-          - os: windows-latest
-            python-version: '3.6'
+          # Python 3.12 is supported from Django 4.2.8 only
+          - python-version: '3.12.13'
+            django-version: '4.0.10'
+          - python-version: '3.12.13'
+            django-version: '4.1.13'
 
     steps:
     - uses: actions/checkout@v2

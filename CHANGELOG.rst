@@ -1,8 +1,78 @@
 Changelog
 =========
 
-Only important changes are mentioned below. See `commit log <https://github.com/darklow/django-suit/commits/develop>`_, `closed issues <https://github.com/darklow/django-suit/issues?direction=desc&sort=updated&state=closed>`_ and `closed pull
-requests <https://github.com/darklow/django-suit/pulls?q=sort%3Aupdated-desc+is%3Apr+is%3Aclosed>`_ for full changes.
+Only important changes are mentioned below.
+
+Versions 2.x are the ``v2`` branch (Bootstrap based), published on PyPI as ``django-suit-v2-pm`` and
+maintained by Pulse-Mind since November 2020 in the `pulse-mind/django-suit
+<https://github.com/pulse-mind/django-suit>`_ fork; see its `commit log
+<https://github.com/pulse-mind/django-suit/commits/v2>`__ for full changes. Entries before 2.4.1 were
+reconstructed from the git history.
+
+Versions 0.x are the original django-suit v1 by Kaspars Sprogis (darklow): see the upstream `commit log
+<https://github.com/darklow/django-suit/commits/develop>`_, `closed issues
+<https://github.com/darklow/django-suit/issues?direction=desc&sort=updated&state=closed>`_ and `closed pull
+requests <https://github.com/darklow/django-suit/pulls?q=sort%3Aupdated-desc+is%3Apr+is%3Aclosed>`_.
+
+
+v2.4.1 (unreleased)
+-------------------
+
+Consolidation release for Django 4.0 to 4.2. Changes visible in the admin are marked **(visible)**.
+
+* [Change] **Python 3.10 or later is required** (``python_requires``): Python 3.8 and 3.9 are no longer
+  tested nor supported. Projects on an older Python keep getting 2.4 from pip.
+* [Change] **Django 3.2 is no longer supported** (end of life since April 2024) nor tested. Tested
+  combinations: Python 3.10 with Django 4.0, 4.1 and 4.2; Python 3.12 with Django 4.2.
+
+* [Fix] **(visible)** Vertical list filters (``list_filter`` entries not in ``suit_list_filter_horizontal``)
+  were hidden on every changelist since 2.0beta3; the filter panel is back, with a "Clear all filters" link.
+* [Fix] Log out through a POST form: logging out with a GET request is deprecated since Django 4.1 and
+  removed in 5.0. Templates overriding the ``usertools`` / ``userlinks`` blocks with their own GET
+  logout link must switch to the same form; ``button.logout-link`` is styled like the other links.
+* [Fix] ``length_is`` template filter (deprecated in Django 4.2, removed in 5.1) no longer used.
+* [Fix] Untranslated strings: password change help text, user add form intro, search result count.
+* [Fix] **(visible)** Password change done page shows suit's user links instead of Django's ones.
+* [Fix] **(visible)** Footer: version block right-aligned again.
+* [Change] ``SUIT_FORM_SIZE_*`` use Bootstrap 5 grid classes (``col-12`` instead of Bootstrap 3
+  ``col-xs-12``, which matched no rule; no visual change). Custom ``suit_form_size`` strings should use
+  ``col-*`` too: ``col-xs-*`` is ignored by Bootstrap 5.
+* [Feature] New ``SUIT_FORM_SIZE_X_TINY`` and ``SUIT_FORM_SIZE_TINY`` form sizes.
+* [Feature] ``ModelAdmin.search_help_text`` (Django 4.0) is displayed.
+* [Change] Overridden admin templates resynchronised with Django 4.2; each one documents its
+  deliberate differences in a header comment.
+* [Change] Removed Python 2 and Django < 2.0 compatibility code (``suit.compat``, ``default_app_config``).
+
+
+v2.4 (2024-02-12)
+-----------------
+
+* [Feature] Django 4.2 support `#17 <https://github.com/pulse-mind/django-suit/pull/17>`_
+
+
+v2.2b1 – v2.2b5 (2022-01-25 – 2022-04-22)
+-----------------------------------------
+
+* [Feature] Django 4.0 support `#15 <https://github.com/pulse-mind/django-suit/pull/15>`_
+* [Change] Default behaviour of the changelist top actions `#16 <https://github.com/pulse-mind/django-suit/pull/16>`_
+* [Fix] Calendar and clock widgets displayed above other elements (z-index)
+* [Feature] Published on PyPI as ``django-suit-v2-pm``
+
+
+v2.1beta1 – v2.1M3 (2021-12-23 – 2021-12-28)
+--------------------------------------------
+
+* [Change] Bootstrap 5
+* [Feature] ``suit.css`` served when ``debug`` is on, ``suit.min.css`` otherwise
+* [Feature] URL parameters for menu items
+* [Fix] Add link shown to users with the add permission, not only to superusers
+
+
+v2.0c – v2.0beta5 (2020-11-14 – 2021-12-23)
+-------------------------------------------
+
+* [Change] Bootstrap 4.3.1 → 4.6.1 `#11 <https://github.com/pulse-mind/django-suit/pull/11>`_
+* [Feature] Django 2.2 and 3.1 support `#5 <https://github.com/pulse-mind/django-suit/pull/5>`_
 
 
 v0.2.16 (2016-01-16)

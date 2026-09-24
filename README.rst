@@ -6,7 +6,7 @@ Django Suit
 
 Django Suit is alternative theme/skin/extension for `Django <http://www.djangoproject.com>`_ administration interface.
 
-v2 version is working with Django 3.2 and Django 4.0, it is using Bootstrap 5.1
+v2 version is working with Django 4.0, 4.1 and 4.2, it is using Bootstrap 5.1
 
 * Project home: http://djangosuit.com/ (not maintained)
 
@@ -47,4 +47,4 @@ See `Contributing documentation <http://django-suit.readthedocs.org/en/v2/contri
 Build Status
 ============
 
-Tested using Python: 3.8 and PyPy + Django: 3.2 (LTS), Django 4.0, Django 4.1, Django 4.2 (LTS)
+Tested using Python 3.10 + Django 4.0, Django 4.1, Django 4.2 (LTS), and Python 3.12 + Django 4.2 (LTS)

@@ -83,6 +83,9 @@ PyPi
 ----
 Update setup.py
 
+Before building, bump ``VERSION`` in ``suit/__init__.py`` (read by ``setup.py``), set the same version
+in ``package.json`` (semver form, e.g. ``2.4.1``) and add its entry at the top of ``CHANGELOG.rst``.
+
 Generate the distribution archives on local machine:
 
 * upgrade your setuptools library on your machine to use the latest version
