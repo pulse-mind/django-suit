@@ -7,6 +7,7 @@ DATABASES = {
 
 INSTALLED_APPS = [
     'suit',
+    'suit.tests.apps.SuitTestsConfig',
     'django.contrib.admin',
     'django.contrib.sessions',
     'django.contrib.auth',
