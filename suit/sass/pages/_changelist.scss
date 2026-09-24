@@ -68,26 +68,13 @@ $filter-col-width: 15rem;
       margin-bottom: $grid-gutter-width-base*0.5;
       display: none;
     }
-    // Filter titles: <h3> up to Django 4.0, <details><summary> (collapsible) since 4.1
-    h3, details > summary {
+    h3 {
       background-color: $inverse-lightest;
       color: #fff;
       font-size: $font-size-sm;
       font-weight: normal;
       padding: $grid-gutter-width-base*0.25 math.div($grid-gutter-width-base, 3);
       margin: 0;
-    }
-    details > summary {
-      cursor: pointer;
-    }
-    // "Show / Hide counts" (Django 5.0) and "Clear all filters" links: plain links above the
-    // filters rather than title bars
-    #changelist-filter-extra-actions h3 {
-      background-color: transparent;
-      padding: 0 0 math.div($grid-gutter-width-base, 3);
-      a {
-        color: $link-color;
-      }
     }
     ul {
       background-color: #fff;

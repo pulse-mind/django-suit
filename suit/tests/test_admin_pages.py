@@ -110,14 +110,13 @@ class AdminPagesTestCase(TestCase):
 
     def test_changelist_filters(self):
         url = self.admin_urls(self.france)['changelist']
-        # horizontal filters (suit_list_filter_horizontal) in the toolbar, the others in the vertical panel
-        response = self.assertPage(url, 'search-filter', '<nav id="changelist-filter"',
-                                   # ModelAdmin.show_facets = ALLOW (Django 5.0): "Show counts" link
-                                   'class="viewlink"')
-        self.assertPage(url + '?continent__id__exact=%d' % self.europe.pk, 'changelist-filter-extra-actions',
-                        'Clear all filters')
-        self.assertPage(url + '?_facets=True', 'class="hidelink"')
-        self.assertPage(url + '?code=FR')
+        # suit_list_filter_horizontal filters in the toolbar; the other list_filter entries are
+        # not displayed (no vertical filter panel), but still apply when present in the URL
+        response = self.assertPage(url, 'search-filter')
+        self.assertNotContains(response, 'id="changelist-filter"')
+        response = self.assertPage(url + '?continent__id__exact=%d' % self.asia.pk)
+        self.assertContains(response, '0 results')
+        self.assertPage(url + '?code=FR', '1 result')
         self.assertPage(url + '?population__isnull=True')
         self.assertPage(url + '?q=fra', '1 result')
         self.assertPage(url + '?_to_field=id&_popup=1')
