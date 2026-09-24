@@ -10,25 +10,21 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest ]
-        python-version: [ '3.10.13', '3.12.13' ]
-        django-version: [ '4.0.10', '4.1.13', '4.2.9' ]
-        exclude:
-          # Python 3.12 is supported from Django 4.2.8 only
-          - python-version: '3.12.13'
-            django-version: '4.0.10'
-          - python-version: '3.12.13'
-            django-version: '4.1.13'
+        python-version: [ '3.10', '3.11', '3.12', '3.13' ]
+        # Latest patch release of each supported Django version
+        django-version: [ '5.2' ]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install Django==${{ matrix.django-version }}
+        pip install "Django~=${{ matrix.django-version }}.0"
     - name: Run Tests
+      # Deprecation warnings fail the build: Django announces its removals one or two versions ahead
       run: |
-        python manage.py test suit --settings=suit.tests.settings
+        python -W error::DeprecationWarning -W error::PendingDeprecationWarning manage.py test suit --settings=suit.tests.settings
