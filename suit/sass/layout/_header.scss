@@ -5,6 +5,10 @@
 #logout-form {
   display: inline;
 }
+// #site-name is a <div> since Django 5.0 (was an <h1>): keep the heading line height
+#site-name {
+  line-height: $headings-line-height;
+}
 button.logout-link {
   background: none;
   border: 0;

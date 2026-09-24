@@ -16,7 +16,8 @@ fieldset {
 // Django plain/original markup
 // -----------------------------------------
 fieldset {
-  > h2 {
+  // .fieldset-heading: Django 5.x heading, an <h4> in stacked inlines (heading_level)
+  > h2, > .fieldset-heading {
     float: left;
     padding-right: 2rem;
   }
@@ -273,25 +274,19 @@ ul.errorlist li a {
   display: none;
 }
 
-/* COLLAPSED FIELDSETS */
+/* COLLAPSIBLE FIELDSETS */
+// Django >= 5.1 renders classes: ('collapse',) fieldsets as <details><summary><h2>, without JS.
 fieldset {
-  &.collapsed {
-    background-color: $form-bg;
-    margin-top: -1rem;
-    overflow: hidden;
-    > * {
-      display: none;
-    }
-    h2 {
-      display: block;
-      font-size: $font-size-h5;
-      font-weight: normal;
-      margin: 0;
-      padding: .5rem 1rem;
-    }
-  }
-  &.collapse {
+  // Bootstrap's .collapse:not(.show) would hide the whole fieldset, summary included
+  &.collapse:not(.show) {
     display: block;
+  }
+  > details > summary {
+    cursor: pointer;
+    > .fieldset-heading {
+      display: inline;
+      padding-right: 2rem;
+    }
   }
 }
 

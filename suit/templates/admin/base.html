@@ -14,11 +14,12 @@
 {% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
 
 {% block branding %}
-    <h1 id="site-name">
+    {# A <div> since Django 5.0, as in its admin/base_site.html: the page title is the only <h1> #}
+    <div id="site-name">
         <a href="{% url 'admin:index' %}">
             {{ site_header|default:_('Django administration') }}
             <span class="header-label">{% trans 'Admin' %}</span></a>
-    </h1>
+    </div>
 {% endblock %}
 
 {% block pretitle %}<div class="content-wrap">{% endblock %}

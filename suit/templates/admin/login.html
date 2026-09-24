@@ -1,7 +1,7 @@
 {% extends 'admin/login.html' %}
 {% load i18n %}
 {% comment %}
-content block based on Django 4.2 admin/login.html. Deliberate differences:
+content block based on Django 5.2 admin/login.html (the title block, with its "Error:" prefix, is inherited). Deliberate differences:
 - inputs are rendered by hand (placeholders, .form-control-lg, .has-danger), so they get no
   autofocus attribute: the inline script focuses username, or password when username is filled
 - non-field errors are listed one per .errornote
@@ -48,7 +48,7 @@ content block based on Django 4.2 admin/login.html. Deliberate differences:
             {% url 'admin_password_reset' as password_reset_url %}
             {% if password_reset_url %}
                 <div class="password-reset-link">
-                    <a href="{{ password_reset_url }}">{% translate 'Forgotten your password or username?' %}</a>
+                    <a href="{{ password_reset_url }}">{% translate 'Forgotten your login credentials?' %}</a>
                 </div>
             {% endif %}
             <div class="submit-row">

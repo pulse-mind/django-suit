@@ -1,9 +1,9 @@
 {% load i18n suit_list %}
 {% comment %}
-Based on Django 4.2 admin/change_list_results.html. Deliberate differences:
+Based on Django 5.2 admin/change_list_results.html (unchanged since 4.2). Deliberate differences:
 - headers and cells go through suit's headers_handler / cells_handler (suit_column_attributes,
   suit_cell_attributes)
-- rows get suit's result_row_attrs (row1 / row2 + suit_row_attributes); Django 4.2 renders a bare <tr>
+- rows get suit's result_row_attrs (row1 / row2 + suit_row_attributes); Django renders a bare <tr>
 {% endcomment %}
 {% if result_hidden_fields %}
 <div class="hiddenfields">{# DIV for HTML validation #}

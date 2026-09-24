@@ -1,6 +1,6 @@
 {% load i18n static suit_list admin_list admin_urls %}
 {% comment %}
-Based on Django 4.2 admin/search_form.html. Deliberate differences:
+Based on Django 5.2 admin/search_form.html. Deliberate differences:
 - the object-tools block (add button) and suit_list_filter_horizontal filters live in this toolbar
 - the search input keeps autofocus (removed by Django 4.0), changelist search is the main action
 {% endcomment %}
@@ -22,7 +22,7 @@ Based on Django 4.2 admin/search_form.html. Deliberate differences:
                 {% endif %}
             {% endblock %}
         {% endblock %}
-        <form id="changelist-search" method="get" class="form-inline">
+        <form id="changelist-search" method="get" class="form-inline" role="search">
             <div><!-- DIV needed for valid HTML -->
                 <label for="searchbar"><img src="{% static "admin/img/search.svg" %}" alt="Search"></label>
                 <input type="text" size="40" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar"{% if cl.search_help_text %} aria-describedby="searchbar_helptext"{% endif %} autofocus>
@@ -36,7 +36,7 @@ Based on Django 4.2 admin/search_form.html. Deliberate differences:
                 <input type="submit" value="{% translate 'Search' %}">
                 {% if show_result_count %}
                     {# One line on purpose: the whitespace of a multi-line blocktranslate is part of the msgid, which then matches no translation #}
-                    <span class="small quiet">{% blocktranslate count counter=cl.result_count %}{{ counter }} result{% plural %}{{ counter }} results{% endblocktranslate %} (<a href="?{% if cl.is_popup %}{{ is_popup_var }}=1{% endif %}">{% if cl.show_full_result_count %}{% blocktranslate with full_result_count=cl.full_result_count %}{{ full_result_count }} total{% endblocktranslate %}{% else %}{% translate "Show all" %}{% endif %}</a>)</span>
+                    <span class="small quiet">{% blocktranslate count counter=cl.result_count %}{{ counter }} result{% plural %}{{ counter }} results{% endblocktranslate %} (<a href="?{% if cl.is_popup %}{{ is_popup_var }}=1{% if cl.add_facets %}&{% endif %}{% endif %}{% if cl.add_facets %}{{ is_facets_var }}{% endif %}">{% if cl.show_full_result_count %}{% blocktranslate with full_result_count=cl.full_result_count %}{{ full_result_count }} total{% endblocktranslate %}{% else %}{% translate "Show all" %}{% endif %}</a>)</span>
                 {% endif %}
 
                 {% for pair in cl.params.items|suit_list_filter_horizontal_params:cl %}

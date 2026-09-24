@@ -1,13 +1,19 @@
 {% extends "admin/change_form.html" %}
-{% load i18n %}
-{# form_top based on Django 4.2 admin/auth/user/add_form.html, plus block.super #}
+{% load i18n static %}
+{# Based on Django 5.2 admin/auth/user/add_form.html, plus block.super in form_top #}
 
 {% block form_top %}
     {{ block.super }}
 
     {% if not is_popup %}
-        <p>{% translate 'First, enter a username and password. Then, you’ll be able to edit more user options.' %}</p>
-    {% else %}
-        <p>{% translate "Enter a username and password." %}</p>
+        <p>{% translate "After you’ve created a user, you’ll be able to edit more user options." %}</p>
     {% endif %}
+{% endblock %}
+{% block extrahead %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'admin/css/unusable_password_field.css' %}">
+{% endblock %}
+{% block admin_change_form_document_ready %}
+  {{ block.super }}
+  <script src="{% static 'admin/js/unusable_password_field.js' %}" defer></script>
 {% endblock %}

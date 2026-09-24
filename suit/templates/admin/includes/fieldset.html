@@ -1,12 +1,18 @@
 {% load suit_forms %}
 {% comment %}
-suit's own layout of Django's admin/includes/fieldset.html (4.2): Bootstrap grid rows sized by
+suit's own layout of Django's admin/includes/fieldset.html (5.2): Bootstrap grid rows sized by
 suit_form_size (.form-group.row, label + column classes) instead of Django's .form-row /
-.flex-container / .fieldBox. Kept from Django: the row classes (errors, hidden, field-<name>),
-checkbox and readonly rendering, the <field id>_helptext id on help texts.
+.flex-container / .fieldBox. Kept from Django: aria-labelledby and the .fieldset-heading heading
+(heading_level / prefix / id_prefix / id_suffix are passed by change_form.html and the inlines),
+collapsible fieldsets as <details>, the row classes (errors, hidden, field-<name>), checkbox and
+readonly rendering, the <field id>_helptext id on help texts.
 {% endcomment %}
-<fieldset class="suit-form module aligned {{ fieldset.classes }}">
-    {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
+<fieldset class="suit-form module aligned {{ fieldset.classes }}"{% if fieldset.name %} aria-labelledby="{{ prefix }}-{{ id_prefix }}-{{ id_suffix }}-heading"{% endif %}>
+    {% if fieldset.name %}
+        {% if fieldset.is_collapsible %}<details><summary>{% endif %}
+        <h{{ heading_level|default:2 }} id="{{ prefix }}-{{ id_prefix }}-{{ id_suffix }}-heading" class="fieldset-heading">{{ fieldset.name }}</h{{ heading_level|default:2 }}>
+        {% if fieldset.is_collapsible %}</summary>{% endif %}
+    {% endif %}
     {% if fieldset.description %}
         <div class="description">{{ fieldset.description|safe }}</div>
     {% endif %}
@@ -46,7 +52,7 @@ checkbox and readonly rendering, the <field id>_helptext id on help texts.
                     </div>
                 {% endif %}
                 {% if field.field.help_text %}
-                    <small class="text-help"{% if field.field.id_for_label %} id="{{ field.field.id_for_label }}_helptext"{% endif %}>{{ field.field.help_text|safe }}</small>
+                    <small class="text-help{% if field.field.is_hidden %} hidden{% endif %}"{% if field.field.id_for_label %} id="{{ field.field.id_for_label }}_helptext"{% endif %}>{{ field.field.help_text|safe }}</small>
                 {% endif %}
 
                 {# Close multi-field #}
@@ -70,4 +76,5 @@ checkbox and readonly rendering, the <field id>_helptext id on help texts.
             </div>
         {% endwith %}
     {% endfor %}
+    {% if fieldset.name and fieldset.is_collapsible %}</details>{% endif %}
 </fieldset>

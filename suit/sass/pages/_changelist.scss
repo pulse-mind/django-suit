@@ -80,8 +80,9 @@ $filter-col-width: 15rem;
     details > summary {
       cursor: pointer;
     }
-    // "Clear all filters" link (Django 3.1), a plain link above the filters rather than a title bar
-    h3#changelist-filter-clear {
+    // "Show / Hide counts" (Django 5.0) and "Clear all filters" links: plain links above the
+    // filters rather than title bars
+    #changelist-filter-extra-actions h3 {
       background-color: transparent;
       padding: 0 0 math.div($grid-gutter-width-base, 3);
       a {

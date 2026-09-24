@@ -87,6 +87,22 @@ class AdminPagesTestCase(TestCase):
         self.assertContains(response, 'col-12 col-sm-9 col-md-10 col-lg-9')
         self.assertNotContains(response, 'col-xs-')
 
+    def test_fieldsets_headings_and_collapse(self):
+        response = self.assertPage(self.admin_urls(self.france)['change'],
+                                   'aria-labelledby="fieldset-0-1-heading"',
+                                   '<h2 id="fieldset-0-1-heading" class="fieldset-heading">Statistics</h2>')
+        # classes: ('collapse',) -> <details> (Django 5.1), no collapse.js
+        self.assertContains(response, '<details><summary>')
+        self.assertContains(response, 'class="fieldset-heading">Collapsed</h2>')
+
+    def test_user_password_forms(self):
+        # usable_password (Django 5.1): enable / disable password-based authentication
+        response = self.assertPage(reverse('admin:auth_user_password_change', args=[self.user.pk]),
+                                   'name="usable_password"', 'unusable_password_field.js',
+                                   'name="unset-password"', 'field-password1')
+        self.assertContains(response, 'class="default set-password"')
+        self.assertPage(reverse('admin:auth_user_add'), 'name="usable_password"', 'unusable_password_field.js')
+
     def test_change_form_with_errors(self):
         response = self.client.post(self.admin_urls(self.france)['add'], {})
         self.assertEqual(response.status_code, 200)
@@ -95,8 +111,12 @@ class AdminPagesTestCase(TestCase):
     def test_changelist_filters(self):
         url = self.admin_urls(self.france)['changelist']
         # horizontal filters (suit_list_filter_horizontal) in the toolbar, the others in the vertical panel
-        response = self.assertPage(url, 'search-filter', 'id="changelist-filter"')
-        self.assertPage(url + '?continent__id__exact=%d' % self.europe.pk, 'changelist-filter-clear')
+        response = self.assertPage(url, 'search-filter', '<nav id="changelist-filter"',
+                                   # ModelAdmin.show_facets = ALLOW (Django 5.0): "Show counts" link
+                                   'class="viewlink"')
+        self.assertPage(url + '?continent__id__exact=%d' % self.europe.pk, 'changelist-filter-extra-actions',
+                        'Clear all filters')
+        self.assertPage(url + '?_facets=True', 'class="hidelink"')
         self.assertPage(url + '?code=FR')
         self.assertPage(url + '?population__isnull=True')
         self.assertPage(url + '?q=fra', '1 result')
