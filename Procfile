@@ -1,1 +1,0 @@
-web: mkdir -p demo/demo/static && python demo/manage.py collectstatic && python demo/manage.py runserver 0.0.0.0:$PORT
