@@ -42,6 +42,7 @@ TEMPLATES = [
 ]
 
 SITE_ID = 1
+USE_TZ = True
 SECRET_KEY = 'secret-key'
 
 ROOT_URLCONF = 'suit.tests.urls'

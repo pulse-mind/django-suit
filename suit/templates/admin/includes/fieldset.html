@@ -5,18 +5,18 @@
         <div class="description">{{ fieldset.description|safe }}</div>
     {% endif %}
     {% for line in fieldset %}
-        {% with is_single=line.fields|length_is:'1' %}
+        {% with fields_count=line.fields|length %}
 
-            <div class="form-group row form-row {% if is_single and line.errors or field.errors %} has-danger errors{% endif %}{% if not line.has_visible_field %} hidden{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% if field.field.is_hidden %} hidden{% endif %}{% endfor %}">
+            <div class="form-group row form-row {% if fields_count == 1 and line.errors or field.errors %} has-danger errors{% endif %}{% if not line.has_visible_field %} hidden{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% if field.field.is_hidden %} hidden{% endif %}{% endfor %}">
 
                 {% for field in line %}
-                    {% if is_single or forloop.first %}
+                    {% if fields_count == 1 or forloop.first %}
                         <label for="{{ field.field.id_for_label }}" class="form-control-label {{ field.field|suit_form_label_class:fieldset }}">{{ field.label_tag }}</label>
-                        <div class="px-2 {% if is_single %} {{ field.field|suit_form_field_class:fieldset }} {% else %}col-xs-12 col-sm-9 col-md-10 col-multi-fields{% endif %}">
+                        <div class="px-2 {% if fields_count == 1 %} {{ field.field|suit_form_field_class:fieldset }} {% else %}col-xs-12 col-sm-9 col-md-10 col-multi-fields{% endif %}">
                     {% endif %}
 
                 {# Open multi-field #}
-                {% if not is_single %}
+                {% if fields_count != 1 %}
                     <div class="multi-field {{ field.field|suit_form_field_widget_class }} {% if field.errors %} has-danger errors{% endif %}">
                     {% if not forloop.first %}
                         <label for="{{ field.field.id_for_label }}" class="form-control-label">{{ field.label_tag }}</label>
@@ -29,12 +29,12 @@
                 {% else %}
                     {{ field.field }}
                 {% endif %}
-                {% if field.errors and not is_single and not field.is_readonly %}
+                {% if field.errors and fields_count != 1 and not field.is_readonly %}
                     <div class="text-help">
                         {{ field.errors }}
                     </div>
                 {% endif %}
-                {% if is_single and line.errors %}
+                {% if fields_count == 1 and line.errors %}
                     <div class="text-help">
                         {{ line.errors }}
                     </div>
@@ -44,7 +44,7 @@
                 {% endif %}
 
                 {# Close multi-field #}
-                {% if not is_single %}
+                {% if fields_count != 1 %}
 
                     {# Close multi-field-content #}
                     {% if not forloop.first %}
@@ -55,7 +55,7 @@
                 {% endif %}
 
                 {# Close multi-row first field container #}
-                {% if is_single or forloop.last %}
+                {% if fields_count == 1 or forloop.last %}
                     </div>
                 {% endif %}
 

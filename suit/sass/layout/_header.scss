@@ -1,5 +1,19 @@
 @use "sass:math";
 
+// Log out is a POST form since Django 4.1 (GET removed in 5.0): make its button look like the
+// other user links, which each layout below styles together with `button.logout-link`.
+#logout-form {
+  display: inline;
+}
+button.logout-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
 body.suit_layout_horizontal {
   #header {
     display: flex;
@@ -54,7 +68,7 @@ body.suit_layout_horizontal {
         color: $header-color;
         @extend .text-light;
       }
-      a {
+      a, button.logout-link {
         display: inline-block;
         margin: 0 2px;
         &:nth-child(2):not(:last-child) {
@@ -132,7 +146,7 @@ body.suit_layout_vertical {
         color: $header-color;
         @extend .text-light;
       }
-      a {
+      a, button.logout-link {
         display: inline-block;
         margin: 0 2px;
         &:nth-child(2):not(:last-child) {
