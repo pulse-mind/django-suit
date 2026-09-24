@@ -161,11 +161,11 @@ class ContinentAdmin(SortableModelAdmin):
 
     def suit_column_attributes(self, column):
         if column == 'countries':
-            return {'class': 'text-xs-center'}
+            return {'class': 'text-center'}
 
     def suit_cell_attributes(self, obj, column):
         if column == 'countries':
-            cls = 'text-xs-center'
+            cls = 'text-center'
             if obj.name == 'Antarctica':
                 cls += ' table-danger'
             return {'class': cls}

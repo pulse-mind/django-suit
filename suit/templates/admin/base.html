@@ -89,7 +89,7 @@
                 {% block footer_content %}
                     <div class="row">
 
-                        <div class="col-xs-12 col-sm-3 footer-links">
+                        <div class="col-12 col-sm-3 footer-links">
                             {% block footer_links %}
                                 <a href="http://djangosuit.com/support/" target="_blank">Support</a>
                                 <a href="http://djangosuit.com/pricing/" target="_blank">Licence</a>
@@ -97,14 +97,14 @@
                             {% endblock %}
                         </div>
 
-                        <div class="col-xs-12 col-sm-6 text-sm-center footer-copyright">
+                        <div class="col-12 col-sm-6 text-sm-center footer-copyright">
                             {% block copyright %}
                                 <span class="d-none d-lg-block">Copyright &copy; 2013-{% now "Y" %}</span>
                                 Developed by <a href="http://djangosuit.com" target="_blank">DjangoSuit.com</a>, maintained by <a href="https://github.com/pulse-mind/django-suit" target="_blank">Pulse-Mind</a>
                             {% endblock %}
                         </div>
 
-                        <div class="col-xs-12 col-sm-3 text-sm-right footer-version">
+                        <div class="col-12 col-sm-3 text-sm-end footer-version">
                             {% block footer_branding %}
                                 {% with admin_name=site_header|default:_('Django administration') django_version='django_version'|suit_conf:request %}
                                     {{ admin_name }}
