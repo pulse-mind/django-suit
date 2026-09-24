@@ -65,12 +65,11 @@ class RelatedFieldAdminMetaclass(type(admin.ModelAdmin)):
         return new_class
 
 
-class RelatedFieldAdmin(admin.ModelAdmin):
+class RelatedFieldAdmin(admin.ModelAdmin, metaclass=RelatedFieldAdminMetaclass):
     """
     Version of ModelAdmin that can use linked and related fields in list_display, e.g.:
     list_display = ('link_to_user', 'address__city', 'link_to_address__city', 'address__country__country_code')
     """
-    __metaclass__ = RelatedFieldAdminMetaclass
 
     def get_queryset(self, request):
         qs = super(RelatedFieldAdmin, self).get_queryset(request)
