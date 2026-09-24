@@ -453,6 +453,11 @@ fieldset {
     display: none;
     //background-color: red;
   }
+  // Django 5.0 sets width="24" height="24" on the icons: keep their native size (13-14px), as before
+  img {
+    width: auto;
+    height: auto;
+  }
   &:hover, &:focus {
     text-decoration: none;
   }
