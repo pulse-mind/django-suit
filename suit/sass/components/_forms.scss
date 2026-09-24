@@ -283,7 +283,8 @@ fieldset {
   }
   > details > summary {
     cursor: pointer;
-    > .fieldset-heading {
+    // .inline-heading: title of a collapsible inline (tabular / stacked), Django 5.1
+    > .fieldset-heading, > .inline-heading {
       display: inline;
       padding-right: 2rem;
     }

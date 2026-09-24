@@ -394,6 +394,42 @@ fieldset {
       min-height: 162px;
     }
   }
+  // Django 5.x markup: the box titles are <label>s in .selector-available-title / .selector-chosen-title
+  // (were <h2>), followed by a help text; styled like the former titles, help text kept for
+  // screen readers only (the selects refer to it with aria-describedby)
+  .selector-available-title, .selector-chosen-title {
+    label {
+      display: block;
+      font-size: 16px;
+      font-weight: $headings-font-weight;
+      line-height: $headings-line-height;
+      margin: .1rem 0 .5rem;
+    }
+    .helptext {
+      @include visually-hidden();
+    }
+  }
+  // Choose / Remove / Choose all / Remove all: <button>s since Django 5.0 (links before)
+  .selector-add, .selector-remove, .selector-chooseall, .selector-clearall {
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    color: $link-color;
+    text-align: left;
+    cursor: pointer;
+    &:hover:not(:disabled) {
+      text-decoration: underline;
+    }
+    &:disabled {
+      opacity: .5;
+      cursor: default;
+    }
+  }
+  // "N selected options not visible (click to clear)": only when the filter hides chosen options
+  .selector-chosen:not(.selector-chosen--with-filtered) .list-footer-display {
+    display: none;
+  }
 }
 .radiolist {
   @include reset-list();
