@@ -15,6 +15,48 @@ Versions 0.x are the original django-suit v1 by Kaspars Sprogis (darklow): see t
 requests <https://github.com/darklow/django-suit/pulls?q=sort%3Aupdated-desc+is%3Apr+is%3Aclosed>`_.
 
 
+v2.5 (2026-09-25)
+-----------------
+
+Django 5.2 LTS release. Changes visible in the admin are marked **(visible)**.
+
+Breaking changes
+
+* [Change] **Django 5.2 LTS only**, Python 3.10 to 3.13, declared as a dependency
+  (``Django>=5.2,<6.0``): pip refuses to install 2.5 in a project pinned to an older Django. Django
+  4.0 to 4.2 are supported by the 2.4.x line (``pip install "django-suit-v2-pm~=2.4.0"``).
+* [Change] Overridden templates follow Django 5.2 markup. Projects overriding them, or styling them by
+  element, should check: fieldset titles are ``<h2 class="fieldset-heading">`` (``<h4>`` in stacked
+  inlines) with ``aria-labelledby``; collapsible fieldsets and inlines are ``<details>``;
+  ``#site-name`` is a ``<div>`` (was an ``<h1>``); the ``footer`` block is rendered inside Django's
+  ``<footer id="footer">`` and suit no longer adds its own ``<div id="footer">``.
+* [Change] Django's dark theme (``dark_mode.css``, ``theme.js``) is no longer loaded: suit has no dark
+  theme, and it only turned native controls dark on suit's light UI.
+* [Change] As in 2.4.2, no vertical list filter panel: only ``suit_list_filter_horizontal`` filters are
+  displayed.
+
+Fixes and features
+
+* [Fix] **(visible)** Collapsible fieldsets and inlines (``classes = ('collapse',)``) are displayed
+  again, as Django 5.1 ``<details>``; they were hidden since the Bootstrap 5 upgrade.
+* [Fix] **(visible)** ``filter_horizontal`` widget: box titles and Choose / Remove buttons styled again
+  for Django 5 markup.
+* [Fix] **(visible)** Vertical layout: the footer was offset by the menu width.
+* [Fix] **(visible)** Related object icons (change / add / delete / view) keep their size of 2.4
+  (Django 5.0 enlarged them).
+* [Fix] ``RelatedFieldAdmin``: ``a__b`` / ``link_to_a__b`` fields in ``list_display`` without an
+  explicit getter work (the metaclass was declared with Python 2 syntax and ignored).
+* [Feature] User password form: enable / disable password-based authentication (Django 5.1).
+* [Feature] Facets (``ModelAdmin.show_facets``, Django 5.0): counts in the horizontal filters,
+  including ``IsNullFieldListFilter``.
+* [Feature] Accessibility markup from Django 5.x: ``aria-labelledby`` on fieldsets, ``role="search"``
+  on the changelist search, help text ids for ``aria-describedby``.
+* [Tests] Admin smoke tests covering suit's extension points; CI on Python 3.10 to 3.13 with Django
+  5.2, deprecation warnings as errors.
+* [Demo] django-select2 8.4, model names instead of "... object (n)", logging in no longer writes to
+  the committed demo database; the Heroku deployment is removed.
+
+
 v2.4.2 (2026-09-24)
 -------------------
 
