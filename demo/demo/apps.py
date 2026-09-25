@@ -33,8 +33,15 @@ class SuitConfig(DjangoSuitConfig):
 
     def prevent_user_last_login(self):
         """
-        Disconnect last login signal
+        Keep logins from writing to the committed demo database (last_login).
+        django.contrib.auth connects update_last_login in its own ready(), which runs after this one
+        (INSTALLED_APPS order): disconnect it on the first request instead.
         """
         from django.contrib.auth import user_logged_in
-        from django.contrib.auth.models import update_last_login
-        user_logged_in.disconnect(update_last_login)
+        from django.core.signals import request_started
+
+        def disconnect_update_last_login(**kwargs):
+            user_logged_in.disconnect(dispatch_uid='update_last_login')
+            request_started.disconnect(disconnect_update_last_login)
+
+        request_started.connect(disconnect_update_last_login, weak=False)

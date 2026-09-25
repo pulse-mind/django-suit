@@ -1,2 +1,2 @@
 Django==5.2.17
-Django-Select2==8.0.0 # https://github.com/codingjoe/django-select2/releases
+Django-Select2==8.4.8 # https://github.com/codingjoe/django-select2/releases

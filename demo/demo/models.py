@@ -9,7 +9,7 @@ class Continent(models.Model):
     name = models.CharField(max_length=256)
     order = models.PositiveIntegerField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -28,7 +28,7 @@ class Country(models.Model):
     architecture = models.TextField(blank=True)
     order = models.PositiveIntegerField(default=0)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -43,7 +43,7 @@ class City(models.Model):
     area = models.BigIntegerField(blank=True, null=True)
     population = models.BigIntegerField(blank=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -91,6 +91,9 @@ class Showcase(models.Model):
     html5_number = models.IntegerField(null=True, blank=True)
     html5_date = models.DateField(null=True, blank=True)
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name_plural = 'Showcase'
 
@@ -107,7 +110,7 @@ class Movie(models.Model):
     class Meta:
         ordering = ('order',)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
@@ -122,7 +125,7 @@ class Book(models.Model):
     class Meta:
         ordering = ('order',)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
@@ -158,5 +161,5 @@ class Book(models.Model):
 #         verbose_name = 'Large Filter Horizontal choice'
 #         verbose_name_plural = 'Large Filter Horizontal choices'
 #
-#     def __unicode__(self):
+#     def __str__(self):
 #         return self.title
