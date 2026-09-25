@@ -6,16 +6,17 @@ Django Suit
 
 Django Suit is alternative theme/skin/extension for `Django <http://www.djangoproject.com>`_ administration interface.
 
-v2 version is working with Django 4.0, 4.1 and 4.2, it is using Bootstrap 5.1
+Version 2.5 supports **Django 5.2 LTS** on Python 3.10 to 3.13, and uses Bootstrap 5.1.
+For Django 4.0 to 4.2, use the 2.4.x versions (``pip install "django-suit-v2-pm~=2.4.0"``).
 
 * Project home: http://djangosuit.com/ (not maintained)
 
 
 License
 =======
- (not maintained)
+
 * Django Suit is licensed under `Creative Commons Attribution-NonCommercial 3.0 <http://creativecommons.org/licenses/by-nc/3.0/>`_ license.
-* Licence and pricing: http://djangosuit.com/pricing/
+* Licence and pricing: http://djangosuit.com/pricing/ (not maintained)
 
 
 Docs & Support
@@ -27,9 +28,7 @@ Docs & Support
 Changelog
 =========
 
-**Note:** Django Suit v2.0 is in active development and not yet ready for production use.
-
-Read more here: Todo: Add issue reference
+See `CHANGELOG.rst <https://github.com/pulse-mind/django-suit/blob/v2/CHANGELOG.rst>`_.
 
 Install
 =========
@@ -47,4 +46,4 @@ See `Contributing documentation <http://django-suit.readthedocs.org/en/v2/contri
 Build Status
 ============
 
-Tested using Python 3.10 + Django 4.0, Django 4.1, Django 4.2 (LTS), and Python 3.12 + Django 4.2 (LTS)
+Tested with Django 5.2 (LTS) on Python 3.10, 3.11, 3.12 and 3.13.

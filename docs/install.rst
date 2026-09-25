@@ -1,6 +1,9 @@
 Install
 =======
 
+Requirements: **Django 5.2 LTS**, Python 3.10 to 3.13. For Django 4.0 to 4.2, install version 2.4
+(``pip install "django-suit-v2-pm~=2.4.0"``).
+
 To install Django Suit
 
 1. Install Django Suit v2 using ``pip`` or ``easy_install``::
