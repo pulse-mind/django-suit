@@ -426,6 +426,47 @@ fieldset {
       cursor: default;
     }
   }
+  // Choose / Remove between the boxes: since Django 5.0 their text is a whole sentence
+  // ("Choose selected permissions") that widens the middle column until the chosen box wraps
+  // under the available one. Show an arrow instead, as Django does; the text stays for screen readers.
+  .selector-chooser {
+    .selector-add, .selector-remove {
+      font-size: 0;
+      line-height: 1;
+      padding: .125rem .5rem;  // a click target larger than the arrow itself
+      &:before {
+        @include fa-icon-font();
+        font-size: $font-size-lg;
+      }
+    }
+    .selector-add:before {
+      content: $icon-arrow-right;
+    }
+    .selector-remove:before {
+      content: $icon-arrow-left;
+    }
+  }
+  // filter_vertical (Django's "stacked" selector): the boxes one above the other, as in Django, with
+  // the Choose / Remove arrows side by side between them and pointing down / up
+  &.stacked {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    .selector-available, .selector-chosen {
+      flex: none;
+    }
+    .selector-chooser {
+      flex-direction: row;
+      min-height: 0;
+      padding: .5rem 0;
+      .selector-add:before {
+        content: $icon-arrow-down;
+      }
+      .selector-remove:before {
+        content: $icon-arrow-up;
+      }
+    }
+  }
   // "N selected options not visible (click to clear)": only when the filter hides chosen options
   .selector-chosen:not(.selector-chosen--with-filtered) .list-footer-display {
     display: none;
