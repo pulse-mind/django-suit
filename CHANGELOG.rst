@@ -15,6 +15,18 @@ Versions 0.x are the original django-suit v1 by Kaspars Sprogis (darklow): see t
 requests <https://github.com/darklow/django-suit/pulls?q=sort%3Aupdated-desc+is%3Apr+is%3Aclosed>`_.
 
 
+v2.5.1 (2026-10-18)
+-------------------
+
+* [Fix] **(visible)** ``filter_horizontal`` widget: the Choose / Remove buttons between the boxes show
+  an arrow instead of Django 5's full sentence ("Choose selected permissions"), which widened the
+  middle column until the chosen box wrapped under the available one. The text is kept for screen
+  readers.
+* [Fix] **(visible)** ``filter_vertical`` widget: the boxes are stacked one above the other, as in
+  Django, with down / up arrows between them (they were displayed side by side like
+  ``filter_horizontal``).
+
+
 v2.5 (2026-09-25)
 -----------------
 
